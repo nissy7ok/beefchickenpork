@@ -1,31 +1,21 @@
 # coding: UTF-8
 
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.utils import np_utils
-import keras
+import keras, sys
 import numpy as np
 import tensorflow
+from PIL import Image
 
 classes = ["cow", "chicken", "pig"]
 num_classes = len(classes)
 image_size = 50
 
-# メインの関数を定義する
-def main():
-    X_train, X_test, y_train, y_test = np.load("./animal.npy", allow_pickle=True)
-    X_train = X_train.astype("float") / 256
-    X_test = X_test.astype("float") / 256
-    y_train = np_utils.to_categorical(y_train, num_classes)
-    y_test = np_utils.to_categorical(y_test, num_classes)
-
-    model = model_train(X_train, y_train)
-    model_eval(model, X_test, y_test)
-
-def model_train(X, y):
+def build_model():
     model = Sequential()
-    model.add(Conv2D(32, (3,3), padding='same', input_shape=X.shape[1:]))
+    model.add(Conv2D(32, (3,3), padding='same', input_shape=(50,50,3)))
     model.add(Activation('relu'))
     model.add(Conv2D(32, (3,3)))
     model.add(Activation('relu'))
@@ -48,20 +38,28 @@ def model_train(X, y):
 
     # opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
     opt = tensorflow.keras.optimizers.RMSprop(lr=0.0001, decay=1e-6)
-
+    
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=32, epochs=100)
-
-    # モデルの保存
-    model.save('./animal_cnn.h5')
+    # モデルのロード
+    model = load_model('./animal_cnn_aug.h5')
 
     return model
 
-def model_eval(model, X, y):
-    scores = model.evaluate(X, y, verbose=1)
-    print('Test Loss: ', scores[0])
-    print('Test Accuracy: ', scores[1])
+def main():
+    image = Image.open(sys.argv[1])
+    image = image.convert('RGB')
+    image = image.resize((image_size, image_size))
+    data = np.asarray(image)
+    X = []
+    X.append(data)
+    X = np.array(X)
+    model = build_model()
+
+    result = model.predict([X])[0]
+    predicted = result.argmax()
+    percentage = int(result[predicted] * 100)
+    print("{0} ({1} %)".format(classes[predicted], percentage))
 
 if __name__ == "__main__":
     main()
