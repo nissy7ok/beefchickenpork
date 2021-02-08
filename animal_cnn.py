@@ -59,7 +59,7 @@ def model_train(X, y):
     return model
 
 def model_eval(model, X, y):
-    scores = model.evaluate(X, y, verbose=1)
+    scores = model.evaluate(X, y, verbose=1)                    
     print('Test Loss: ', scores[0])
     print('Test Accuracy: ', scores[1])
 
