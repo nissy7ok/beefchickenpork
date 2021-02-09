@@ -8,6 +8,10 @@ import numpy as np
 import tensorflow
 from PIL import Image
 
+classes = ["cow", "chicken", "pig"]
+num_classes = len(classes)
+image_size = 50
+
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif'])
 
@@ -31,7 +35,25 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file', filename=filename))
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+            model = load_model('./animal_cnn_aug.h5')
+
+            image = Image.open(filepath)
+            image = image.convert('RGB')
+            image = image.resize((image_size, image_size))
+            data = np.asarray(image)
+            X = []
+            X.append(data)
+            X = np.array(X)
+
+            result = model.predict([X])[0]
+            predicted = result.argmax()
+            percentage = int(result[predicted] * 100)
+            return "ラベル：" + classes[predicted] + ", 確率：" + str(percentage) + "%"
+
+
+            # return redirect(url_for('uploaded_file', filename=filename))
     return '''
     <!doctype html>
     <html>
