@@ -13,6 +13,15 @@ classes = ["cow", "chicken", "pig"]
 num_classes = len(classes)
 image_size = 50
 
+def memory_limit():
+    physical_devices = tensorflow.config.list_physical_devices('GPU')
+    if len(physical_devices) > 0:
+        for device in physical_devices:
+            tensorflow.config.experimental.set_memory_growth(device, True)
+            print('{} memory growth: {}'.format(device, tensorflow.config.experimental.get_memory_growth(device)))
+    else:
+        print("Not enough GPU hardware devices available")
+
 def build_model():
     model = Sequential()
     model.add(Conv2D(32, (3,3), padding='same', input_shape=(50,50,3)))
@@ -47,10 +56,11 @@ def build_model():
     return model
 
 def main():
+    memory_limit()
     image = Image.open(sys.argv[1])
     image = image.convert('RGB')
     image = image.resize((image_size, image_size))
-    data = np.asarray(image)
+    data = np.asarray(image) / 256
     X = []
     X.append(data)
     X = np.array(X)
