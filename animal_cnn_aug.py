@@ -20,8 +20,18 @@ def main():
     y_train = np_utils.to_categorical(y_train, num_classes)
     y_test = np_utils.to_categorical(y_test, num_classes)
 
+    memory_limit()
     model = model_train(X_train, y_train)
     model_eval(model, X_test, y_test)
+
+def memory_limit():
+    physical_devices = tensorflow.config.list_physical_devices('GPU')
+    if len(physical_devices) > 0:
+        for device in physical_devices:
+            tensorflow.config.experimental.set_memory_growth(device, True)
+            print('{} memory growth: {}'.format(device, tensorflow.config.experimental.get_memory_growth(device)))
+    else:
+        print("Not enough GPU hardware devices available")
 
 def model_train(X, y):
     model = Sequential()
