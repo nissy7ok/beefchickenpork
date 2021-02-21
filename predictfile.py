@@ -17,7 +17,16 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.secret_key = "super secret key"
+app.secret_key = "super secret key"
+
+def memory_limit():
+    physical_devices = tensorflow.config.list_physical_devices('GPU')
+    if len(physical_devices) > 0:
+        for device in physical_devices:
+            tensorflow.config.experimental.set_memory_growth(device, True)
+            print('{} memory growth: {}'.format(device, tensorflow.config.experimental.get_memory_growth(device)))
+    else:
+        print("Not enough GPU hardware devices available")
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
@@ -37,6 +46,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
+            memory_limit()
+
             model = load_model('./animal_cnn_aug.h5')
 
             image = Image.open(filepath)
@@ -50,7 +61,7 @@ def upload_file():
             result = model.predict([X])[0]
             predicted = result.argmax()
             percentage = int(result[predicted] * 100)
-            return "ラベル：" + classes[predicted] + ", 確率：" + str(percentage) + "%"
+            return "ラベル：" + classes[predicted] + ", 確率：" + str(percentage) + "%"
 
 
             # return redirect(url_for('uploaded_file', filename=filename))
