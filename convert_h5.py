@@ -1,6 +1,11 @@
-import coremltools
-from keras.models import load_model
+import coremltools as ct
 
-coreml_model = coremltools.converters.convert('animal_cnn_aug.h5', input_names='image', image_input_names='image', output_names='Prediction', class_labels=['cow', 'chicken', 'pig'])
+class_labels = ['cow', 'chicken', 'pig']
+classifier_config = ct.ClassifierConfig(class_labels)
+
+coreml_model = ct.converters.convert('animal_cnn_aug.h5',
+    inputs=[ct.ImageType()],
+    classifier_config=classifier_config,
+    source='TensorFlow',)
 
 coreml_model.save('./animal_cnn_aug.mlmodel')
