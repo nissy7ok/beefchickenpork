@@ -13,6 +13,7 @@
 		C4AA107E25E33A4800DC88A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4AA107C25E33A4800DC88A2 /* Main.storyboard */; };
 		C4AA108025E33A4A00DC88A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4AA107F25E33A4A00DC88A2 /* Assets.xcassets */; };
 		C4AA108325E33A4A00DC88A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4AA108125E33A4A00DC88A2 /* LaunchScreen.storyboard */; };
+		C4AA108D25E3528200DC88A2 /* animal_cnn_aug.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C4AA108C25E3528200DC88A2 /* animal_cnn_aug.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C4AA107F25E33A4A00DC88A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4AA108225E33A4A00DC88A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4AA108425E33A4A00DC88A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4AA108C25E3528200DC88A2 /* animal_cnn_aug.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = animal_cnn_aug.mlmodel; path = ../../animal_cnn_aug.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				C4AA107625E33A4800DC88A2 /* AppDelegate.swift */,
 				C4AA107825E33A4800DC88A2 /* SceneDelegate.swift */,
 				C4AA107A25E33A4800DC88A2 /* ViewController.swift */,
+				C4AA108C25E3528200DC88A2 /* animal_cnn_aug.mlmodel */,
 				C4AA107C25E33A4800DC88A2 /* Main.storyboard */,
 				C4AA107F25E33A4A00DC88A2 /* Assets.xcassets */,
 				C4AA108125E33A4A00DC88A2 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				C4AA107B25E33A4800DC88A2 /* ViewController.swift in Sources */,
 				C4AA107725E33A4800DC88A2 /* AppDelegate.swift in Sources */,
+				C4AA108D25E3528200DC88A2 /* animal_cnn_aug.mlmodel in Sources */,
 				C4AA107925E33A4800DC88A2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +291,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4644392HM;
 				INFOPLIST_FILE = ClassifyAI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,6 +310,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4644392HM;
 				INFOPLIST_FILE = ClassifyAI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
