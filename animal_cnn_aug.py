@@ -15,8 +15,8 @@ image_size = 50
 # メインの関数を定義する
 def main():
     X_train, X_test, y_train, y_test = np.load("./animal_aug.npy", allow_pickle=True)
-    X_train = X_train.astype("float") / 256
-    X_test = X_test.astype("float") / 256
+    X_train = X_train.astype("float") / 255
+    X_test = X_test.astype("float") / 255
     y_train = np_utils.to_categorical(y_train, num_classes)
     y_test = np_utils.to_categorical(y_test, num_classes)
 
@@ -57,7 +57,7 @@ def model_train(X, y):
     model.add(Activation('softmax'))
 
     # opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
-    opt = tensorflow.keras.optimizers.RMSprop(lr=0.0001, decay=1e-6)
+    opt = tensorflow.keras.optimizers.RMSprop(lr=0.001, decay=1e-6)
 
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 
