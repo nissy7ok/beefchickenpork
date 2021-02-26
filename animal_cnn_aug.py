@@ -6,7 +6,7 @@ from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.utils import np_utils
 import keras
 import numpy as np
-import tensorflow
+import tensorflow as tf
 
 classes = ["cow", "chicken", "pig"]
 num_classes = len(classes)
@@ -15,8 +15,8 @@ image_size = 50
 # メインの関数を定義する
 def main():
     X_train, X_test, y_train, y_test = np.load("./animal_aug.npy", allow_pickle=True)
-    X_train = X_train.astype("float") / 256
-    X_test = X_test.astype("float") / 256
+    X_train = X_train.astype("float") / 255
+    X_test = X_test.astype("float") / 255
     y_train = np_utils.to_categorical(y_train, num_classes)
     y_test = np_utils.to_categorical(y_test, num_classes)
 
@@ -25,18 +25,19 @@ def main():
     model_eval(model, X_test, y_test)
 
 def memory_limit():
-    physical_devices = tensorflow.config.list_physical_devices('GPU')
+    physical_devices = tf.config.list_physical_devices('GPU')
     if len(physical_devices) > 0:
         for device in physical_devices:
-            tensorflow.config.experimental.set_memory_growth(device, True)
-            print('{} memory growth: {}'.format(device, tensorflow.config.experimental.get_memory_growth(device)))
+            tf.config.experimental.set_memory_growth(device, True)
+            print('{} memory growth: {}'.format(device, tf.config.experimental.get_memory_growth(device)))
     else:
         print("Not enough GPU hardware devices available")
 
 def model_train(X, y):
-    model = Sequential()
+    model = Sequential([tf.keras.layers.BatchNormalization()])
     model.add(Conv2D(32, (3,3), padding='same', input_shape=X.shape[1:]))
     model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Conv2D(32, (3,3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
@@ -44,20 +45,20 @@ def model_train(X, y):
     
     model.add(Conv2D(64, (3,3), padding='same'))
     model.add(Activation('relu'))
-    model.add(Conv2D(64, (3,3)))
-    model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Dropout(0.25))
     
     model.add(Flatten())
     model.add(Dense(512))
     model.add(Activation('relu'))
-    model.add(Dropout(0.5))
+    model.add(Dense(64))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.25))
     model.add(Dense(3))
     model.add(Activation('softmax'))
 
     # opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
-    opt = tensorflow.keras.optimizers.RMSprop(lr=0.0001, decay=1e-6)
+    opt = tf.keras.optimizers.Adam()
 
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 
