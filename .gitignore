@@ -2,3 +2,4 @@ download.py
 *.jpg
 .DS_Store
 *.npy
+*.h5
