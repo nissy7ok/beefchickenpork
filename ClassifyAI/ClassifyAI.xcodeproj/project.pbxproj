@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C40441F425E37A84009AFD60 /* animal_cnn_aug.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C40441F325E37A84009AFD60 /* animal_cnn_aug.mlmodel */; };
+		C4124CC525EDDE0A00B1EF7F /* vgg16_transfer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C4124CC425EDDE0A00B1EF7F /* vgg16_transfer.mlmodel */; };
 		C4AA107725E33A4800DC88A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA107625E33A4800DC88A2 /* AppDelegate.swift */; };
 		C4AA107925E33A4800DC88A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA107825E33A4800DC88A2 /* SceneDelegate.swift */; };
 		C4AA107B25E33A4800DC88A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA107A25E33A4800DC88A2 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		C40441F325E37A84009AFD60 /* animal_cnn_aug.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = animal_cnn_aug.mlmodel; path = ../../animal_cnn_aug.mlmodel; sourceTree = "<group>"; };
+		C4124CC425EDDE0A00B1EF7F /* vgg16_transfer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = vgg16_transfer.mlmodel; path = ../../vgg16_transfer.mlmodel; sourceTree = "<group>"; };
 		C4AA107325E33A4800DC88A2 /* ClassifyAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassifyAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4AA107625E33A4800DC88A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4AA107825E33A4800DC88A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				C4AA107825E33A4800DC88A2 /* SceneDelegate.swift */,
 				C4AA107A25E33A4800DC88A2 /* ViewController.swift */,
 				C40441F325E37A84009AFD60 /* animal_cnn_aug.mlmodel */,
+				C4124CC425EDDE0A00B1EF7F /* vgg16_transfer.mlmodel */,
 				C4AA107C25E33A4800DC88A2 /* Main.storyboard */,
 				C4AA107F25E33A4A00DC88A2 /* Assets.xcassets */,
 				C4AA108125E33A4A00DC88A2 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				C4AA107B25E33A4800DC88A2 /* ViewController.swift in Sources */,
 				C4AA107725E33A4800DC88A2 /* AppDelegate.swift in Sources */,
+				C4124CC525EDDE0A00B1EF7F /* vgg16_transfer.mlmodel in Sources */,
 				C40441F425E37A84009AFD60 /* animal_cnn_aug.mlmodel in Sources */,
 				C4AA107925E33A4800DC88A2 /* SceneDelegate.swift in Sources */,
 			);

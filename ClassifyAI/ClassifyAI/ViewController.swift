@@ -35,7 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePrediction(image: UIImage) {
-        guard let model = try? VNCoreMLModel(for: animal_cnn_aug().model) else {
+        guard let model = try? VNCoreMLModel(for:  vgg16_transfer().model) else {
             fatalError("Model not found")
         }
         
